@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Shop Manager</string>
+    <string name="tab_products">Products</string>
+    <string name="tab_sales">Sales</string>
+    <string name="add_product">Add Product</string>
+    <string name="save">Save</string>
+    <string name="start_sale">Start Sale</string>
+    <string name="complete_sale">Complete Sale</string>
+</resources>
