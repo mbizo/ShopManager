@@ -1,0 +1,46 @@
+package com.figstom.shop
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+
+class ProductsAdapter :
+    ListAdapter<Product, ProductsAdapter.ProductViewHolder>(ProductDiffCallback()) {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_product, parent, false)
+        return ProductViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        val product = getItem(position)
+        holder.bind(product)
+    }
+
+    class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val nameText: TextView = itemView.findViewById(R.id.tvName)
+        private val priceText: TextView = itemView.findViewById(R.id.tvPrice)
+        private val stockText: TextView = itemView.findViewById(R.id.tvStock)
+
+        fun bind(product: Product) {
+            nameText.text = product.name
+            priceText.text = "Price: ${product.sellingPrice}"
+            stockText.text = "Stock: ${product.stock}"
+        }
+    }
+
+    class ProductDiffCallback : DiffUtil.ItemCallback<Product>() {
+        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+            return oldItem == newItem
+        }
+    }
+}
